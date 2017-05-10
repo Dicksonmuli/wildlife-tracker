@@ -11,14 +11,14 @@ public class App {
 		staticFileLocation("/public");
 		String layout = "templates/layout.vtl";
 		// if a port is set for the app, use it else continue with 4567
-		// ProcessBuilder process = new ProcessBuilder();
+		ProcessBuilder process = new ProcessBuilder();
 		Integer port;
-		// if (process.environment().get("PORT") != null) {
-			// port = Integer.parseInt(process.environment().get("PORT"));
-		// }else {
-			// port = 4567;
-		// }
-		// setPort(port);
+		if (process.environment().get("PORT") != null) {
+			port = Integer.parseInt(process.environment().get("PORT"));
+		}else {
+			port = 4567;
+		}
+		setPort(port);
 
 		// root route
 
