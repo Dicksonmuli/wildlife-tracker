@@ -80,4 +80,13 @@ public class Animal {
 		 .executeUpdate();
 	 }
  }
+ public void update() {
+	 try(Connection con = DB.sql2o.open()) {
+		 String sql = "UPDATE animals SET name = :name WHERE id=:id;";
+		 con.createQuery(sql)
+		 .addParameter("id", this.id)
+		 .throwOnMappingFailure(false)
+		 .executeUpdate();
+	 }
+ }
 }
