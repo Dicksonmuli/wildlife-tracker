@@ -75,5 +75,11 @@ public class AnimalTest {
     animal2.save();
     assertEquals(Animal.find(animal2.getId()), animal2);
   }
-
+  //deleting animal from the database
+  @Test
+  public void delete_deletesAnimal_true() {
+    testAnimal.save();
+    testAnimal.delete();
+    assertEquals(null, Animal.find(testAnimal.getId()));
+  }
 }
