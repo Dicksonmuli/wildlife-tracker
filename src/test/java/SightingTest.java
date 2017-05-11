@@ -34,5 +34,11 @@ public class SightingTest {
 	public void getRangerName_sightingInstantiatesWithName_Hippo() {
 		assertEquals("Juma", testSighting.getRangerName());
 	}
-
+	//overriding equals
+	@Test
+	public void equals_returnsTrueIfLocationAnimalIdAreSame_true() {
+		Sighting someSighting = new Sighting(1, "Park A", "Juma");
+		Sighting otherSighting = new Sighting(1, "Park A", "Juma");
+		assertTrue(someSighting.equals(otherSighting));
+	}
 }
