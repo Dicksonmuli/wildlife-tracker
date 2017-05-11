@@ -41,4 +41,16 @@ public class SightingTest {
 		Sighting otherSighting = new Sighting(1, "Park A", "Juma");
 		assertTrue(someSighting.equals(otherSighting));
 	}
+	//saving to the db
+	@Test
+	public void save_insertsObjectIntoDatabase_Sighting() {
+		//saves automatically when an instance is created
+		assertTrue(Sighting.all().get(0).equals(testSighting));
+	}
+	//returning all database entries
+	@Test
+	public void all_returnsAllInstancesOfPerson_true() {
+		assertTrue(Sighting.all().get(0).equals(testSighting));
+		assertTrue(Sighting.all().get(1).equals(secondSighting));
+	}
 }

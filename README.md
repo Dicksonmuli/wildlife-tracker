@@ -8,4 +8,4 @@ CREATE TABLE sightings (id serial PRIMARY KEY, location varchar,  ranger_name va
 
 DROP DATABASE wildlife_tracker_test ;
 
-CREATE TABLE sightings(id serial PRIMARY KEY, animal_Id int, location varchar, ranger_name varchar)
+CREATE TABLE sightings(id serial PRIMARY KEY, animalId int, location varchar, rangername varchar)

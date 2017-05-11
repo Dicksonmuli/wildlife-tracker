@@ -12,6 +12,17 @@ public class Sighting {
 		this.animalId = animalId;
 		this.location = location;
 		this.rangerName = rangerName;
+
+		//saving each time an instance is created
+		try(Connection con = DB.sql2o.open()) {
+  		 String sql = "INSERT INTO sightings (animalId, location, rangerName) VALUES (:animalId, :location, :rangerName)";
+  		 this.id = (int) con.createQuery(sql, true)
+  		 .addParameter("animalId", this.animalId)
+  		 .addParameter("location", this.location)
+ 		 .addParameter("rangerName", this.rangerName)
+  		 .executeUpdate()
+  		 .getKey();
+  	 }
 	}
 	//gets the animalId
 	public int getAnimalId() {
