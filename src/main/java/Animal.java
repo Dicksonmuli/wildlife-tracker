@@ -61,4 +61,15 @@ public class Animal {
 						this.getType().equals(newAnimal.getType());
 	 }
  }
+ //finds the animal with given animal id
+ public static Animal find(int id) {
+	 try(Connection con = DB.sql2o.open()) {
+		 String sql = "SELECT * FROM animals where id=:id";
+		 Animal animal = con.createQuery(sql)
+		 .addParameter("id", id)
+		 .throwOnMappingFailure(false)
+		 .executeAndFetchFirst(Animal.class);
+		return animal;
+	 }
+ }
 }
