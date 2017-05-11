@@ -9,9 +9,30 @@ public class SightingTest {
 
 	@Rule
 	public DatabaseRule database = new DatabaseRule();
-
+	//creating an instance of Sighting
 	@Before
 	public void instance() {
-		testSighting = new Sighting("Hippo", "Park A");
-		secondSighting = new Sighting("Harriet", "harriet@harriet.com");
+		testSighting = new Sighting(1, "Park A", "Juma");
+		secondSighting = new Sighting(2, "Park B", "Melvin");
 	}
+	//person instantiates corectly
+	@Test
+	public void Sighting_instantiatesCorrectly_true() {
+		assertTrue(testSighting instanceof Sighting);
+	}
+	//getName returns animal name
+	@Test
+	public void getAnimalId_sightingInstantiatesWithId_1() {
+		assertEquals(1, testSighting.getAnimalId());
+	}
+	//getName returns location
+	public void getLocation_sightingInstantiatesWithlocation_Park_A() {
+		assertEquals("Park A", testSighting.getLocation());
+	}
+	//getName returns rangerName
+	@Test
+	public void getRangerName_sightingInstantiatesWithName_Hippo() {
+		assertEquals("Juma", testSighting.getRangerName());
+	}
+
+}
