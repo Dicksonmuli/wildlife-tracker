@@ -25,4 +25,47 @@ public class AnimalTest {
 	public void Animal_instanciatesCorrectly_true() {
 		assertTrue(testAnimal instanceof Animal);
 	}
+	//test if method returns name
+	@Test
+	public void getName_returnsName_Lion() {
+		assertEquals("Lion", testAnimal.getName());
+	}
+
+	//test if method returns type
+	@Test
+	public void getType_returnsName_true() {
+		assertEquals("notEndangered", testAnimal.getType());
+	}
+	//throws exception if name field is null
+	@Test(expected = IllegalArgumentException.class)
+	public void instance_throwsError_null(){
+		Animal testAnimal = new Animal("");
+	}
+	//saves in database
+  @Test
+  public void save_savesAnimalIntoDB_true() {
+    testAnimal.save();
+    assertTrue(Animal.all().get(0).equals(testAnimal));
+  }
+  //id assigned to an instance once created
+  @Test
+  public void save_assignsIdToAnimal() {
+    testAnimal.save();
+    Animal savedAnimal = Animal.all().get(0);
+    assertEquals(savedAnimal.getId(), testAnimal.getId());
+  }
+  //all retrieves animals from DB
+  @Test
+  public void all_returnsAllInstancesOfAnimal_true() {
+    testAnimal.save();
+    animal2.save();
+    assertTrue(Animal.all().get(0).equals(testAnimal));
+    assertTrue(Animal.all().get(1).equals(animal2));
+  }
+  //overriding equals
+  @Test
+  public void equals_returnsTrueIfNameIsSame_true() {
+    Animal animal3 = new Animal("Lion");
+    assertTrue(testAnimal.equals(animal3));
+  }
 }

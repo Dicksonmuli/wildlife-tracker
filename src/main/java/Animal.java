@@ -28,5 +28,37 @@ public class Animal {
 		return type;
 	}
 
+	//saves animal in DB
+	public void save(){
+		try(Connection con = DB.sql2o.open()) {
+			String sql = "INSERT INTO animals (name, type) VALUES(:name, :type)";
+			this.id =(int) con.createQuery(sql, true)
+			.addParameter("name", this.name)
+			.addParameter("type", this.type)
+			.throwOnMappingFailure(false)
+			.executeUpdate()
+			.getKey();
+		}
+	}
+	//all method retrieves all the animals saved in DB
+	public static List<Animal> all() {
+		String sql = "SELECT * FROM animals WHERE type='notEndangered';";
+		try(Connection con = DB.sql2o.open()) {
+			return con.createQuery(sql)
+			.throwOnMappingFailure(false)
+			.executeAndFetch(Animal.class);
+		}
+	}
 
+	//overriding equals
+	@Override
+ public boolean equals(Object someAnimal){
+	 if (!(someAnimal instanceof Animal)) {
+		 return false;
+	 } else {
+		 Animal newAnimal = (Animal) someAnimal;
+		 return this.getName().equals(newAnimal.getName()) &&
+						this.getType().equals(newAnimal.getType());
+	 }
+ }
 }
