@@ -26,5 +26,12 @@ nav.navbar-findcond span.badge.new { background: rgba(255, 0, 0, 0.8); color: #f
 .inner-wrapper{border-top: 30px; border-left: 100px; border-right: 100px; border-radius: 10px; border-width: medium; border-color: #695134; background-color: white; margin: 30px;}
 
 .box-links{border: 2px; border-radius: 3px; border-color: #695134}
-p{font-size: 15px;}
-h1,h2{ color: #412B2B}
+
+/*sightings form */
+.sighting-form{background-color: #695134}
+.sighting-form p{color: #412B2B; font-size: 15px}
+
+/*index page*/
+.index-page{margin-left: 20px}
+.index-page p{color: #412B2B; font-size: 15px}
+.index-page h1,h2{ color: #412B2B}

@@ -1,5 +1,6 @@
-#if($sightings)
+
   <h2>All Sightings </h2>
+	#if($sightings)
   <ul>
     #foreach ($sighting in $sightings)
       <li><a href="/sightings/$sighting.getId()">Ranger $sighting.getRangerName spotted $sighting.getAnimalId() at $sighting.getLocation </a></li>
