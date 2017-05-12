@@ -1,0 +1,17 @@
+
+
+<div class="row">
+  <div class="col-sm-4">
+    <h3>Animal Details:</h3>
+		<h3>
+		Ranger $sighting.getRangerName() spotted $sighting.getAnimalId() at $sighting.getLocation
+		</h3>
+    <h5>Type: $animal.getType()</em></h5>
+    #if($animal.getType().equals("Endangered"))
+      <h5>Health: $endangered.getHealth()</h5>
+      <h5>Age: $endangered.getAge()</h5>
+    #end
+    <a href="/animals/$animal.getId()/edit" class="edit btn btn-primary" role="button"> edit</a>
+    <a href="/animals/$animal.getId()/delete" class="delete" role="button">delete</a>
+  </div>
+</div>

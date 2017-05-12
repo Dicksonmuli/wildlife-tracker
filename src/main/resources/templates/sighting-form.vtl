@@ -1,7 +1,7 @@
 <h2>Add Sighting</h2>
 <div class="container sighting-form">
 <div class="row">
-<div class="col-md-4">
+<div class="col-md-4 instructions">
 <h2>Instructions</h2>
 <p></p>
 </div>
@@ -10,13 +10,13 @@
 <form action="/sightings" method="post" class="form-control">
 
 <div class="form-group">
-        <label for="animal" class="in-line">Animal:</label>
-        <select id="animal" name="animal" type="text" class="form-control">
-          #foreach ($animal in $animals)
-            <option value="$animal.getId()">$animal.getName()</option>
-          #end
-        </select>
-      </div>
+<label for="animal" class="in-line">Animal:</label>
+<select id="animal" name="animal" type="text" class="form-control">
+			#foreach ($animal in $animals)
+				<option value="$animal.getId()">$animal.getName()</option>
+			#end
+	</select>
+</div>
 
 <div class="form-group">
 		<label for="location">Location:</label>
@@ -37,27 +37,4 @@
 </form>
 </div>
 </div>
-</div>
-
-<h2 class="text-center">$animal.getName()</h2>
-<div class="row">
-  <div class="col-sm-3 col-sm-offset-3">
-    <h3>Animal Details:</h3>
-    <h5>Type: $animal.getType()</em></h5>
-    #if($animal.getType().equals("Endangered"))
-      <h5>Health: $endangered.getHealth()</h5>
-      <h5>Age: $endangered.getAge()</h5>
-    #end
-    <a href="/animals/$animal.getId()/edit" class="edit btn btn-primary" role="button"> edit</a>
-    <a href="/animals/$animal.getId()/delete" class="delete" role="button">delete</a>
-  </div>
-  <div class="col-sm-3">
-    <h3>All Sightings:</h3>
-    #if($Sighting.allByAnimal($animal.getId()).size() == 0)
-      <p><em>none</em></p>
-    #end
-    #foreach($sighting in $Sighting.allByAnimal($animal.getId()))
-      <p>Location: $sighting.getLocation(), Ranger: $sighting.getRangerName() <em>$sighting.getTimestamp()</em></p>
-    #end
-  </div>
 </div>

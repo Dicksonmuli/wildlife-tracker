@@ -12,8 +12,8 @@ public class SightingTest {
 	//creating an instance of Sighting
 	@Before
 	public void instance() {
-		testSighting = new Sighting(1, "Park A", "Juma");
-		secondSighting = new Sighting(2, "Park B", "Melvin");
+		testSighting = new Sighting("Lion", "Park A", "Juma");
+		secondSighting = new Sighting("Lion", "Park B", "Melvin");
 	}
 	//person instantiates corectly
 	@Test
@@ -23,7 +23,7 @@ public class SightingTest {
 	//getName returns animal name
 	@Test
 	public void getAnimalId_sightingInstantiatesWithId_1() {
-		assertEquals(1, testSighting.getAnimalId());
+		assertEquals("Lion", testSighting.getName());
 	}
 	//getName returns location
 	public void getLocation_sightingInstantiatesWithlocation_Park_A() {
@@ -37,8 +37,8 @@ public class SightingTest {
 	//overriding equals
 	@Test
 	public void equals_returnsTrueIfLocationAnimalIdAreSame_true() {
-		Sighting someSighting = new Sighting(1, "Park A", "Juma");
-		Sighting otherSighting = new Sighting(1, "Park A", "Juma");
+		Sighting someSighting = new Sighting("Lion", "Park A", "Juma");
+		Sighting otherSighting = new Sighting("Lion", "Park A", "Juma");
 		assertTrue(someSighting.equals(otherSighting));
 	}
 	//saving to the db

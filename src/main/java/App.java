@@ -38,6 +38,13 @@ public class App {
 		//new sighting
 		get("/sightings/new", (request, response) -> {
 			Map<String, Object> model = new HashMap<String, Object>();
+			Animal animal = Animal.find(Integer.parseInt(request.queryParams("animal")));
+			try{
+				animal.save();
+			}catch (IllegalArgumentException exception) {
+				System.out.println("Animal Name Required");
+			}
+			model.put("animal", animal);
 			model.put("template", "templates/sighting-form.vtl");
 			return new ModelAndView(model, layout);
 		}, new VelocityTemplateEngine());
@@ -46,17 +53,15 @@ public class App {
 			Map<String, Object> model = new HashMap<String, Object>();
 			String rangerName = request.queryParams("rangerName");
 			String location = request.queryParams("location");
-			int age = Integer.parseInt(request.queryParams("age"));
-			String type = request.queryParams("health");
 			String name =request.queryParams("animalName");
 
-			Animal newAnimal = new Animal(name);
+			Sighting sighting = new Sighting(name,location, rangerName);
 			try{
-				Sighting sighting = new Sighting(animalId,location, rangerName);
-				newAnimal.save();
+				sighting.save();
 			}catch (IllegalArgumentException exception) {
-				System.out.println("Animal Name, Location and Ranger Name Required")
+				System.out.println("Animal Name, Location and Ranger Name Required");
 			}
+			model.put("sighting", sighting);
 			model.put("template", "templates/sightings.vtl");
  			return new ModelAndView(model, layout);
 			}, new VelocityTemplateEngine());
@@ -74,17 +79,17 @@ public class App {
 				int age = Integer.parseInt(request.queryParams("age"));
 				String health = request.queryParams("health");
 				String name =request.queryParams("animalName");
-				Animal newAnimal = new Animal(name);
 				try{
 					Endangered newEndangered = new Endangered(name, health, age);
-					newAnimal.save();
+					newEndangered.save();
 				}catch (IllegalArgumentException exception) {
-					System.out.println("Animal Name, health and age Required")
+					System.out.println("Animal Name, health and age Required");
 				}
-				model.put("template", "templates/endangered-form.vtl");
+				model.put("template", "templates/sighting-form.vtl");
 	 			return new ModelAndView(model, layout);
 				}, new VelocityTemplateEngine());
-			//
+			//non endangered animal
+
 
 	}
 }
