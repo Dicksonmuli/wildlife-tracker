@@ -38,6 +38,11 @@ public class App {
 		//new sighting
 		get("/sightings/new", (request, response) -> {
 			Map<String, Object> model = new HashMap<String, Object>();
+			model.put("template", "templates/new-sighting-modal.vtl");
+			return new ModelAndView(model, layout);
+		}, new VelocityTemplateEngine());
+		get("/sightings/new/add", (request, response) -> {
+			Map<String, Object> model = new HashMap<String, Object>();
 			try{
 				Animal animal = Animal.find(Integer.parseInt(request.queryParams("id")));
 				model.put("animal", animal);
@@ -86,6 +91,25 @@ public class App {
 				model.put("template", "templates/sighting-form.vtl");
 	 			return new ModelAndView(model, layout);
 				}, new VelocityTemplateEngine());
+				//add new animal
+			get("/animals/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/animal-form.vtl");
+      return new ModelAndView(model, layout);
+     }, new VelocityTemplateEngine());
+
+    post("/animals/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String name = request.queryParams("name");
+      try {
+        Animal animal = new Animal(name);
+        animal.save();
+      } catch (IllegalArgumentException exception) {
+        System.out.println("Please enter an animal name.");
+      }
+      response.redirect("/sightings/new/add");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 			//non endangered animal
 			get("/animals/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();

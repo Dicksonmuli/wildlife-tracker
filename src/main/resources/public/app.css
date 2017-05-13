@@ -36,3 +36,5 @@ nav.navbar-findcond span.badge.new { background: rgba(255, 0, 0, 0.8); color: #f
 .index-page h1,h2{ color: #412B2B}
 /*instructions*/
 .instructions{background-color: #695134; border-radius: 2px; color: white}
+/*login*/
+#profile-img{border-radius: 200px; margin-left: 40px;}

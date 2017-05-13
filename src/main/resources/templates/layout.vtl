@@ -20,35 +20,79 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-          <a class="navbar-brand" href="#"><img href="images/logo.png" height="30px" width="30px">WildlifeTracker</a>
+          <a class="navbar-brand" href="/"><img href="images/logo.png" height="30px" width="30px">WildlifeTracker</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-bell-o"></i> Sightings <span class="badge"><span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#"><i class="fa fa-fw fa-tag"></i> <span class="badge">All sightings</span> >> </a></li>
-                <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Add Sighting</span> >></a></li>
-                <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">My Sightings</span> >> </a></li>
+                <li><a href="/sightings"><i class="fa fa-fw fa-tag"></i> <span class="badge">All sightings</span> >> </a></li>
+                <li><a href="/sightings/new"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Add Sighting</span> >></a>
+                </li>
+                <li><a href="/sightings"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">My Sightings</span> >> </a></li>
               </ul>
             </li>
-            <li class="active"><a href="#">Animals <span class="sr-only">(current)</span></a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-bell-o"></i> Animals <span class="badge"><span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/animals">All Animals >> </a></li>
+                <li><a href="/animals/new">Add Animal >></a></li>
+                <li><a href="/endangered/new">Add Endangered Animal >></a></li>
+              </ul>
+            </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Login</a></li>
-                <li><a href="#">SignUp</a></li>
+                <li><a data-toggle="modal" data-target="#myModal">Login</a></li>
+                <li><a href="signup">SignUp</a></li>
                 <li class="divider"></li>
-                <li><a href="#">User</a></li>
+                <li><a href="/sightings">User</a></li>
               </ul>
             </li>
           </ul>
-          <form class="navbar-form navbar-right search-form" role="search">
-            <input type="text" class="form-control" placeholder="Search animal" />
-          </form>
         </div>
       </div>
     </nav>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Log in</h4>
+        </div>
+        <div class="modal-body">
+          <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+          <p id="profile-name"></p>
+          <form class="form-signin">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="email" class="form-control" placeholder="Name" required autofocus>
+            <input type="password" class="form-control" placeholder="Password" required>
+            <div id="remember" class="checkbox">
+              <label>
+                       <input type="checkbox" value="remember-me"> Remember me
+                   </label>
+            </div>
+            <button class="btn btn-lg btn-success btn-block btn-signin" type="submit">Go!</button>
+          </form>
+          <!-- /form -->
+          <a href="#" class="forgot-password">
+               Forgot the password?
+           </a>
+          <ul>
+            <li>
+              <input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Sign In with Google">
+              <input class="btn btn-primary btn-block" type="button" id="sign-in-twitter" value="Sign In with Twitter">
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="container main-body">
 
