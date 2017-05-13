@@ -10,7 +10,7 @@ public class App {
 	public static void main(String[] args) {
 		staticFileLocation("/public");
 		String layout = "templates/layout.vtl";
-		// if a port is set for the app, use it else continue with 4567
+		// if a port is get for the app, use it else continue with 4567
 		ProcessBuilder process = new ProcessBuilder();
 		Integer port;
 		if (process.environment().get("PORT") != null) {
@@ -96,7 +96,7 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/sightings/:id/delete", (request, response) -> {
+    get("/animals/:id/delete", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Animal.find(Integer.parseInt(request.params(":id"))).delete();
       response.redirect("/animals");
@@ -110,30 +110,11 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/animals/:id/edit", (request, response) -> {
+    get("/sightings/:id/edit", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("animal", Animal.find(Integer.parseInt(request.params(":id"))));
       model.put("endangered", Endangered.find(Integer.parseInt(request.params(":id"))));
       model.put("template", "templates/animal-edit.vtl");
-      return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
-
-    post("/animals/:id/edit", (request, response) -> {
-      Map<String, Object> model = new HashMap<String, Object>();
-      int id = Integer.parseInt(request.params(":id"));
-      String name = request.queryParams("name");
-      String health = request.queryParams("health");
-      String age = request.queryParams("age");
-      Animal animal = Animal.find(id);
-      animal.setName(name);
-      animal.update();
-      if(animal.getType().equals("Endangered")) {
-        Endangered endangered = Endangered.find(id);
-        endangered.setHealth(health);
-        endangered.setAge(age);
-        endangered.update();
-      }
-      response.redirect("/animals/" + id);
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -148,12 +129,11 @@ public class App {
     post("/sightings/:id/edit", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       int id = Integer.parseInt(request.params(":id"));
+			String name = request.queryParams("name");
       String location = request.queryParams("location");
       String rangerName = request.queryParams("rangerName");
       Sighting sighting = Sighting.find(id);
-      sighting.setLocation(location);
-      sighting.setRangerName(rangerName);
-      sighting.update();
+      sighting.update(name, location, rangerName);
       response.redirect("/sightings");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

@@ -1,0 +1,45 @@
+<h3 class="text-center">Edit Sighting of $Animal.find($sighting.getAnimalId()).getName()</h3>
+
+<div class="container sighting-form">
+<div class="row">
+<div class="col-md-4 instructions">
+<h2>Instructions</h2>
+<p>Visitors flock to the country to see Africa's “Big Five.” But, lions, elephants, rhinos, leopards, and buffalo are just a handful of the treasured species in this nation. Baboons, zebras, giraffes, flamingoes, and more are enjoyed by tourists, thanks to a strong national park system and a network of wildlife reserves.
+</p>
+</div>
+
+  <div class="col-sm-8">
+    <form action="/sightings/$sighting.getId()/edit" method="post">
+      <div class="form-group">
+        <label for="location">Location:</label>
+        <select id="location" name="location" type="text" class="form-control">
+          #if ($sighting.getLocation().equals("Zone A"))
+            <option value="Zone A" selected>Zone A</option>
+          #else
+            <option value="Zone A">Zone A</option>
+          #end
+          #if ($sighting.getLocation().equals("Zone B"))
+            <option value="Zone B" selected>Zone B</option>
+          #else
+            <option value="Zone B">Zone B</option>
+          #end
+          #if ($sighting.getLocation().equals("Zone C"))
+            <option value="Zone C" selected>Zone C</option>
+          #else
+            <option value="Zone C">Zone C</option>
+          #end
+          #if ($sighting.getLocation().equals("Zone D"))
+            <option value="Zone D" selected>Zone D</option>
+          #else
+            <option value="Zone D">Zone D</option>
+          #end
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="rangerName">Ranger Name:</label>
+        <input type="text" name="rangerName" class="form-control" value="$sighting.getRangerName()">
+      </div>
+      <button class="btn btn-primary form-control" type="submit" name="add-sighting">Edit</button>
+    </form>
+  </div>
+</div>

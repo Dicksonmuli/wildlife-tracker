@@ -80,29 +80,47 @@ public class Sighting {
 
 		 }
 	 }
+	 // deletes a Sighting with a specified id
+ 	public void delete() {
+ 		 try(Connection con = DB.sql2o.open()) {
+ 			 String sql = "DELETE FROM sightings where id=:id";
+			 con.createQuery(sql)
+			.addParameter("id", this.id)
+			.executeUpdate();
 
-	 //retrieves all animals associated with this sightings
+ 		 }
+ 	 }
+	//  retrieves all animals associated with this sightings
 
-	//  public List<Object> getAnimals() {
-  //    List<Object> allAnimals = new ArrayList<Object>();
-	 //
-  //    try(Connection con = DB.sql2o.open()) {
-  //      String sqlAnimal = "SELECT * FROM animals WHERE sightingId=:id AND type='notEndangered';";
-  //      List<Animal> animal = con.createQuery(sqlAnimal)
-  //        .addParameter("id", this.id)
- // 				.throwOnMappingFailure(false)
-  //        .executeAndFetch(Animal.class);
-  //        allAnimals.addAll(animal);
-	 //
-  //      String sqlEndangeredAnimal = "SELECT * FROM animals WHERE sightingId=:id AND type='endangered';";
-  //      List<Endangered> endangeredAnimal = con.createQuery(sqlEndangered)
-  //        .addParameter("id", this.id)
- // 				.throwOnMappingFailure(false)
-  //        .executeAndFetch(Endangered.class);
-  //        allAnimals.addAll(endangeredAnimal);
-  //      }
-	 //
-  //      return allAnimals;
-  //  }
+	 public List<Object> getAnimals() {
+     List<Object> allAnimals = new ArrayList<Object>();
+
+     try(Connection con = DB.sql2o.open()) {
+       String sqlAnimal = "SELECT * FROM animals WHERE sightingId=:id AND type='notEndangered';";
+       List<Animal> animal = con.createQuery(sqlAnimal)
+         .addParameter("id", this.id)
+ 				.throwOnMappingFailure(false)
+         .executeAndFetch(Animal.class);
+         allAnimals.addAll(animal);
+
+       String sqlEndangered = "SELECT * FROM animals WHERE sightingId=:id AND type='endangered';";
+       List<Endangered> endangeredAnimal = con.createQuery(sqlEndangered)
+         .addParameter("id", this.id)
+ 				.throwOnMappingFailure(false)
+         .executeAndFetch(Endangered.class);
+         allAnimals.addAll(endangeredAnimal);
+       }
+
+       return allAnimals;
+   }
+	 public void update(String name, String location, String rangerName) {
+		try(Connection con = DB.sql2o.open()) {
+			String sql = "UPDATE animals SET (name, location, rangerName) = (:name, :location, :rangerName) WHERE id=:id;";
+			con.createQuery(sql)
+			.addParameter("id", this.id)
+			.throwOnMappingFailure(false)
+			.executeUpdate();
+		}
+	 }
 
 }
