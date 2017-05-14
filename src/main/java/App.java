@@ -119,9 +119,7 @@ public class App {
       model.put("template", "templates/animal.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-<<<<<<< HEAD
 
-=======
 		//displaying all the animas
 		get("/animals", (request, response) -> {
 			Map<String, Object> model = new HashMap<String, Object>();
@@ -130,7 +128,6 @@ public class App {
 			model.put("template", "templates/animalas.vtl");
 			return new ModelAndView(model, layout);
 		}, new VelocityTemplateEngine());
->>>>>>> 9f72f771c7c5c6a0d5e8542b6904a1e07e82b39b
     get("/animals/:id/delete", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Animal.find(Integer.parseInt(request.params(":id"))).delete();
